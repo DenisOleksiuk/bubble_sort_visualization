@@ -22,12 +22,13 @@ function* sort_visualization() {
         const heightOfNextElement = parseInt(nextElement.style.height);
 
         if (heightOfCurrentElement > heightOfNextElement) {
-          const pos1 = parseInt(currentElement.style.transform.split('(')[1]) || 0;
-          const pos2 = parseInt(nextElement.style.transform.split('(')[1]) || 0;
+          const numOfTransCurr =
+            parseInt(currentElement.style.transform.split('(')[1]) || 0;
+          const numOfTransNext = parseInt(nextElement.style.transform.split('(')[1]) || 0;
 
           // change transform styles
-          currentElement.style.transform = `translate(${pos1 + 63}px)`;
-          nextElement.style.transform = `translate(${pos2 - 63}px)`;
+          currentElement.style.transform = `translate(${numOfTransCurr + 63}px)`;
+          nextElement.style.transform = `translate(${numOfTransNext - 63}px)`;
 
           // swap elements
           [nodeList[i], nodeList[i + 1]] = [nodeList[i + 1], nodeList[i]];
@@ -45,7 +46,6 @@ function* sort_visualization() {
 const generator = sort_visualization();
 
 const start = (ms) => {
-  console.log(ms);
   const result = generator.next();
   if (result.done) {
     return;
